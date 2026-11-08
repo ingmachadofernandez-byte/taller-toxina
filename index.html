@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Taller Universitario - Toxina Botulínica</title>
+  <style>
+    :root {
+      --fb-blue: #1877f2;
+      --fb-bg: #f0f2f5;
+      --fb-card-bg: #ffffff;
+      --fb-text: #050505;
+      --fb-secondary-text: #65676b;
+      --danger-color: #e41e3f;
+      --warning-color: #f7b928;
+      --success-color: #31a24c;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--fb-bg);
+      color: var(--fb-text);
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: var(--fb-card-bg);
+      border-bottom: 1px solid #e5e5e5;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .cover-photo {
+      background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+      height: 180px;
+      color: white;
+      display: flex;
+      align-items: flex-end;
+      padding: 20px;
+    }
+
+    .profile-bar {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .profile-title h1 {
+      margin: 0;
+      font-size: 24px;
+    }
+
+    .profile-title p {
+      margin: 4px 0 0 0;
+      color: var(--fb-secondary-text);
+      font-size: 14px;
+    }
+
+    nav {
+      background: var(--fb-card-bg);
+      border-top: 1px solid #e5e5e5;
+    }
+
+    .nav-tabs {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      list-style: none;
+      padding: 0;
+    }
+
+    .nav-tabs li {
+      padding: 14px 20px;
+      cursor: pointer;
+      font-weight: 600;
+      color: var(--fb-secondary-text);
+      border-bottom: 3px solid transparent;
+    }
+
+    .nav-tabs li.active {
+      color: var(--fb-blue);
+      border-bottom-color: var(--fb-blue);
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 20px auto;
+      padding: 0 15px;
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    .card {
+      background: var(--fb-card-bg);
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    }
+
+    .post-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--fb-blue);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      margin-right: 10px;
+    }
+
+    .post-author {
+      font-weight: 600;
+    }
+
+    .post-time {
+      font-size: 12px;
+      color: var(--fb-secondary-text);
+    }
+
+    .calc-box {
+      background: #f7f8fa;
+      border: 1px solid #e1e4e8;
+      border-radius: 6px;
+      padding: 15px;
+      margin-top: 15px;
+    }
+
+    .form-group {
+      margin-bottom: 12px;
+    }
+
+    label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+
+    select,
+    input {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    .syringe-result {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-top: 15px;
+    }
+
+    .syringe-card {
+      background: white;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      padding: 10px;
+      text-align: center;
+    }
+
+    .syringe-card h4 {
+      margin: 5px 0;
+      color: var(--fb-blue);
+    }
+
+    .badge-danger {
+      background: var(--danger-color);
+      color: white;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 12px;
+    }
+
+    .badge-warning {
+      background: var(--warning-color);
+      color: black;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 12px;
+    }
+
+    .comments-section {
+      border-top: 1px solid #eee;
+      margin-top: 15px;
+      padding-top: 10px;
+    }
+
+    .comment-input {
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .comment-input input {
+      flex: 1;
+    }
+
+    .btn {
+      background: var(--fb-blue);
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="cover-photo">
+      <div>
+        <span class="badge-warning">TALLER DOCENTE EN VIVO</span>
+        <h2 style="margin: 5px 0;">Navegando con Seguridad en Toxina Botulínica con la Dra Natalia Suarez</h2>
+      </div>
+    </div>
+    <div class="profile-bar">
+      <div class="profile-title">
+        <h1>Fan Page del Taller: Práctica y Criterio Clínico</h1>
+        <p>Metodología Design Thinking </p>
+      </div>
+    </div>
+    <nav>
+      <ul class="nav-tabs">
+        <li class="active" onclick="switchTab('muro')">Muro Teórico</li>
+        <li onclick="switchTab('jeringas')">Calculadora de Jeringas</li>
+        <li onclick="switchTab('casos')">Casos Clínicos</li>
+        <li onclick="switchTab('urgencias')">Tablero de Complicaciones</li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="container">
+
+    <!-- MURO TEORICO -->
+    <div id="muro" class="tab-content active">
+      <div class="card">
+        <div class="post-header">
+          <div class="avatar">TB</div>
+          <div>
+            <div class="post-author">Profesor / Ponente</div>
+            <div class="post-time">Regla de Oro Nº 1</div>
+          </div>
+        </div>
+        <h3>"La TOXINA no se enseña por milímetros, se enseña por unidades, planos y músculos"</h3>
+        <p>Antes de tomar cualquier jeringa, debes poder justificar en voz alta: <strong>qué músculo, cuántas unidades y
+            con qué dilución.</strong></p>
+      </div>
+
+      <div class="card">
+        <h3>Mecanismo en 4 Pasos</h3>
+        <ol>
+          <li>Unión a la terminación nerviosa.</li>
+          <li>Entrada por endocitosis.</li>
+          <li>Corte de proteínas SNARE (SNAP-25).</li>
+          <li>Bloqueo de acetilcolina = relajación muscular muscular.</li>
+        </ol>
+        <p><em>Recordatorio clínico: El pico de acción se evalúa a los 14 días. Nunca hacer refuerzos a las 48
+            horas.</em></p>
+      </div>
+    </div>
+
+    <!-- CALCULADORA DE JERINGAS -->
+    <div id="jeringas" class="tab-content">
+      <div class="card">
+        <h3>Simulador de Lectura de Jeringas</h3>
+        <div class="calc-box">
+          <div class="form-group">
+            <label>Vial de Toxina:</label>
+            <select id="vialSelect">
+              <option value="100">100 Unidades</option>
+              <option value="50">50 Unidades</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Solución Salina añadida (mL):</label>
+            <select id="dilutionSelect" onchange="calculate()">
+              <option value="1">1.0 mL (10 U por 0.1 mL)</option>
+              <option value="2" selected>2.0 mL (5 U por 0.1 mL)</option>
+              <option value="2.5">2.5 mL (4 U por 0.1 mL)</option>
+              <option value="5">5.0 mL (2 U por 0.1 mL)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Dosis deseada por punto (Unidades):</label>
+            <input type="number" id="unitsInput" value="4" oninput="calculate()">
+          </div>
+        </div>
+
+        <div class="syringe-result">
+          <div class="syringe-card">
+            <h4>Jeringa 0.3 mL</h4>
+            <p><strong>1 marca = 1 U</strong></p>
+            <p id="res03">0 marcas</p>
+          </div>
+          <div class="syringe-card">
+            <h4>Jeringa 0.5 mL</h4>
+            <p><strong>1 marca = 1 U</strong></p>
+            <p id="res05">0 marcas</p>
+          </div>
+          <div class="syringe-card" style="border-color: var(--danger-color);">
+            <h4 style="color: var(--danger-color);">Jeringa 1.0 mL</h4>
+            <p><strong>1 marca = 2 U</strong> <span class="badge-danger">¡Ojo!</span></p>
+            <p id="res10">0 marcas</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CASOS CLINICOS -->
+    <div id="casos" class="tab-content">
+      <div class="card">
+        <span class="badge-danger">Caso 2 • Error Clínico</span>
+        <h3>Caída de ceja y contorno en V</h3>
+        <p>Paciente de 30 años. Se aplicaron 10 U a un lado de la frente y 4 U al otro lado, demasiado cerca del reborde
+          orbitario.</p>
+        <p><strong>¿Qué falló?</strong> La falta de simetría y la inyección por debajo del límite de seguridad de 1.5 cm
+          del reborde óseo.</p>
+
+        <div class="comments-section">
+          <strong>Discusión de clase:</strong>
+          <div id="commentsList" style="margin-top: 8px;">
+            <p style="font-size: 13px; color: #555;"><em>Equipo 1: "No agregaríamos más dosis en el lado caído;
+                citaríamos en 3 semanas para evaluar refinación."</em></p>
+          </div>
+          <div class="comment-input">
+            <input type="text" id="newComment" placeholder="Escribe tu respuesta clínica...">
+            <button class="btn" onclick="addComment()">Comentar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- URGENCIAS -->
+    <div id="urgencias" class="tab-content">
+      <div class="card" style="border-left: 5px solid var(--danger-color);">
+        <h3 style="color: var(--danger-color);">Complicación Vascular (Surco Nasogeniano)</h3>
+        <p><strong>Señales de alerta:</strong> Dolor intenso inmediato durante la inyección, palidez de la piel o
+          aspecto moteado.</p>
+        <p><strong>Conducta inmediata:</strong> Detener la inyección inmediatamente, retirar la aguja, realizar masaje
+          local y aplicar calor. La seguridad del paciente prevalece sobre el procedimiento estético.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.nav-tabs li').forEach(el => el.classList.remove('active'));
+      document.getElementById(tabId).classList.add('active');
+      event.target.classList.add('active');
+    }
+
+    function calculate() {
+      const dilution = parseFloat(document.getElementById('dilutionSelect').value);
+      const units = parseFloat(document.getElementById('unitsInput').value) || 0;
+
+      // Concentracion: 100 U / dilution
+      const uPerMl = 100 / dilution;
+      const mlNeeded = units / uPerMl;
+
+      // Marcas
+      const marcas03 = (mlNeeded * 100).toFixed(1);
+      const marcas05 = (mlNeeded * 100).toFixed(1);
+      const marcas10 = (mlNeeded * 50).toFixed(1); // En 1 mL, cada marca vale 2 U
+
+      document.getElementById('res03').innerText = marcas03 + " marcas (" + mlNeeded.toFixed(2) + " mL)";
+      document.getElementById('res05').innerText = marcas05 + " marcas (" + mlNeeded.toFixed(2) + " mL)";
+      document.getElementById('res10').innerText = marcas10 + " marcas (" + mlNeeded.toFixed(2) + " mL)";
+    }
+
+    function addComment() {
+      const input = document.getElementById('newComment');
+      if (input.value.trim() !== '') {
+        const list = document.getElementById('commentsList');
+        const p = document.createElement('p');
+        p.style.fontSize = '13px';
+        p.innerHTML = '<strong>Estudiante:</strong> ' + input.value;
+        list.appendChild(p);
+        input.value = '';
+      }
+    }
+
+    // Ejecutar calculo inicial
+    calculate();
+  </script>
+
+</body>
+
+</html>
